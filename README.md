@@ -1,6 +1,6 @@
 # VHDL 16-bit Calculator
 
-This repository contains a simple 16-bit calculator implemented in VHDL, which supports basic arithmetic and logical operations. The calculator can perform operations like addition, subtraction, AND, OR, NOT, and XOR on two 16-bit input values.
+This repository contains a simple 16-bit calculator (simplified ALU) implemented in VHDL, which supports basic arithmetic and logical operations. The calculator can perform operations like addition, subtraction, AND, OR, NOT, and XOR on two 16-bit input values.
 
 ## Features
 
