@@ -1,0 +1,27 @@
+[*]
+[*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
+[*] Wed Jan 15 23:04:56 2025
+[*]
+[dumpfile] "/home/sim/Documents/UniUd/Embedded-Systems/simplified-ALU-project/simulation.vcd"
+[dumpfile_mtime] "Wed Jan 15 23:03:08 2025"
+[dumpfile_size] 2829
+[savefile] "/home/sim/Documents/UniUd/Embedded-Systems/simplified-ALU-project/20250116-result.gtkw"
+[timestart] 0
+[size] 1578 856
+[pos] -88 -88
+*-24.665789 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb_alu.
+[sst_width] 273
+[signals_width] 200
+[sst_expanded] 1
+[sst_vpaned_height] 226
+@420
+tb_alu.uut.in1[15:0]
+tb_alu.uut.in2[15:0]
+tb_alu.uut.overflow
+tb_alu.uut.result[15:0]
+tb_alu.uut.sig[3:0]
+tb_alu.uut.temp_result[16:0]
+tb_alu.uut.zero
+[pattern_trace] 1
+[pattern_trace] 0
