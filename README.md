@@ -1,24 +1,30 @@
-# VHDL 16-bit Calculator
+# VHDL 16-bit Calculator Testbench
 
-This repository contains a simple 16-bit calculator (simplified ALU) implemented in VHDL, which supports basic arithmetic and logical operations. The calculator can perform operations like addition, subtraction, AND, OR, NOT, and XOR on two 16-bit input values.
+This repository contains a testbench for a simple 16-bit calculator (simplified ALU) implemented in VHDL. The calculator supports basic arithmetic and logical operations, including addition, subtraction, AND, OR, NOT, XOR, multiplication and shifting. This testbench simulates various operations to verify the correct functionality of the calculator and includes tests for overflow detection.
 
 ## Features
 
-- **Arithmetic Operations**: Addition (`+`), Subtraction (`-`)
+- **Arithmetic Operations**: Addition (`+`), Subtraction (`-`), Multiplication (`*`)
 - **Logical Operations**: AND, OR, XOR
 - **Unary Operations**: NOT for both inputs (`in1` and `in2`)
-- **Overflow Detection**: Overflow detection for addition and subtraction operations
+- **Overflow Detection**: Overflow detection for arithmetic operations like addition, subtraction, and multiplication
+- **Shifting**: Left and right shift operations (logical shifts)
 - **Zero Detection**: Output signal to indicate if the result is zero
+- **Various Test Cases**: Tests for different combinations of inputs, including edge cases like overflow and zero results
 
 ## Entity and Architecture Overview
 
-### Entity `calculator`
-The `calculator` entity has the following ports:
+### Entity `tb_alu`
+The `tb_alu` entity is a testbench for the ALU component (`calculator`) and does not have any ports.
 
-- **in1**: 16-bit input vector
-- **in2**: 16-bit input vector
-- **result**: 16-bit output vector to store the result of the operation
-- **sig**: A 4-bit control signal that determines which operation to perform:
+### Architecture `testbench`
+The `testbench` architecture includes signals to stimulate the ALU and capture its outputs. It uses a `process` to apply various test vectors to the ALU and verify the results. The architecture connects to the `calculator` component and performs a series of tests to verify the correct behavior of all operations.
+
+## Signals
+
+- **in1_tb**: 16-bit input vector for the first operand
+- **in2_tb**: 16-bit input vector for the second operand
+- **sig_tb**: A 4-bit control signal that determines which operation to perform:
   - `0`: Addition (`+`)
   - `1`: Subtraction (`-`)
   - `2`: AND
@@ -26,40 +32,66 @@ The `calculator` entity has the following ports:
   - `4`: NOT for `in1`
   - `5`: NOT for `in2`
   - `6`: XOR
-- **overflow**: A signal indicating if there was an overflow during an arithmetic operation
-- **zero**: A signal that indicates whether the result is zero
+  - `7`: Right shift
+  - `8`: Left shift
+  - `9`: Multiplication
+- **result_tb**: 16-bit output vector to store the result of the operation
+- **overflow_tb**: A signal indicating if there was an overflow during an arithmetic operation
 
-### Architecture `behavioral`
-The `behavioral` architecture implements the logic for each operation. It uses a `process` to evaluate the operation specified by the `sig` input. The architecture includes overflow detection for addition and subtraction, and logical operations for AND, OR, NOT, and XOR. The result is updated accordingly, and the overflow and zero signals are set based on the computation.
+### Key Test Cases
 
-## Operation Logic
+- **Addition**: 
+   - Tests basic addition, including cases with negative numbers and overflow detection.
 
-1. **Addition (`+`)**:
-   - If the signs of the operands are the same and the result has a different sign, an overflow is detected.
-   - The result is stored in `result`, or `0` if overflow is detected.
+- **Subtraction**:
+   - Tests subtraction, including negative and positive results, as well as overflow conditions.
 
-2. **Subtraction (`-`)**:
-   - If the signs of the operands are different and the result has a different sign, an overflow is detected.
-   - The result is stored in `result`, or `0` if overflow is detected.
+- **AND Operation**:
+   - Tests bitwise AND operation between the two input operands.
 
-3. **AND**:
-   - Performs bitwise AND between `in1` and `in2` and stores the result.
+- **OR Operation**:
+   - Tests bitwise OR operation between the two input operands.
 
-4. **OR**:
-   - Performs bitwise OR between `in1` and `in2` and stores the result.
+- **NOT Operation**:
+   - Tests bitwise NOT operation applied to the first or second input operand.
 
-5. **NOT**:
-   - Performs bitwise NOT on `in1` or `in2` and stores the result.
+- **XOR Operation**:
+   - Tests bitwise XOR operation between the two input operands.
 
-6. **XOR**:
-   - Performs bitwise XOR between `in1` and `in2` and stores the result.
+- **Shifting**:
+   - Tests logical right and left shifts, checking if the bits are correctly shifted and handling edge cases.
 
-7. **Overflow**:
-   - The `overflow` signal is set to `'1'` if an overflow is detected during addition or subtraction. Otherwise, it is `'0'`.
+- **Multiplication**:
+   - Tests multiplication with various combinations of positive and negative numbers, and checks for overflow.
 
-8. **Zero Detection**:
-   - The `zero` signal is set to `'1'` if the result is zero, otherwise, it is set to `'0'`.
+## How to Run the Testbench
 
-## Requirements
+1. Ensure you have a VHDL simulator installed (e.g., ModelSim, Xilinx Vivado, or GHDL).
+2. Compile the ALU entity (`calculator`) and the testbench (`tb_alu.vhdl`).
+3. Run the simulation to see the results of the test cases.
 
-- **VHDL Simulator**: To test and simulate the code, you can use any standard VHDL simulator like ModelSim, Xilinx Vivado, or GHDL. I use GHDL and GTKWAVE.++
+## Simple script execution
+
+To facilitate the compilation, simulation, and cleanup of temporary files, two scripts are included: `run_alu.sh` and `clear_files.sh`.
+
+### **Compilation and Simulation: `run_alu.sh`**
+
+This script automates the process of compiling and simulating the ALU project, and it also handles the visualization of the results via GTKWave.
+
+#### How to execute:
+
+1. **Make the scripts executable giving them permissions**:
+   ```bash
+   chmod +x run_alu.sh
+   chmod +x clear_files.sh
+
+   ./clear_files.sh
+   ./run_alu.sh
+
+## Author
+
+This project was developed for educational purposes.
+
+## License
+
+This project is released under the MIT license. Feel free to use and modify it!

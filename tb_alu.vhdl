@@ -1,3 +1,8 @@
+-- File: tb_alu.vhdl
+
+-- Grassi Andrea
+-- Simplified ALU project
+
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
@@ -125,6 +130,69 @@ begin
         in1_tb <= std_logic_vector(to_signed(21845, 16));
         in2_tb <= std_logic_vector(to_signed(-21846, 16));
         sig_tb <= "0011"; -- "OR"
+        wait for DELAY;
+
+        -- Right shift (dx) tests
+        -- Shift right by 1 position (8 -> 4)
+        in1_tb <= std_logic_vector(to_signed(8, 16));
+        in2_tb <= std_logic_vector(to_signed(1, 16));
+        sig_tb <= "0111"; -- Right shift
+        wait for DELAY;
+
+        -- Shift right by 4 positions (256 -> 16)
+        in1_tb <= std_logic_vector(to_signed(256, 16));
+        in2_tb <= std_logic_vector(to_signed(4, 16));
+        sig_tb <= "0111"; -- Right shift
+        wait for DELAY;
+
+        -- Left shift (sx) tests
+        -- Shift left by 1 position (4 -> 8)
+        in1_tb <= std_logic_vector(to_signed(4, 16));
+        in2_tb <= std_logic_vector(to_signed(1, 16));
+        sig_tb <= "1000"; -- Left shift
+        wait for DELAY;
+
+        -- Shift left by 2 positions (3 -> 12)
+        in1_tb <= std_logic_vector(to_signed(3, 16));
+        in2_tb <= std_logic_vector(to_signed(2, 16));
+        sig_tb <= "1000"; -- Left shift
+        wait for DELAY;
+
+        -- Multiplication tests
+        -- Simple multiplication (5 * 3 = 15)
+        in1_tb <= std_logic_vector(to_signed(5, 16));
+        in2_tb <= std_logic_vector(to_signed(3, 16));
+        sig_tb <= "1001"; -- Multiplication
+        wait for DELAY;
+
+        -- Multiplication with negative number (-4 * 3 = -12)
+        in1_tb <= std_logic_vector(to_signed(-4, 16));
+        in2_tb <= std_logic_vector(to_signed(3, 16));
+        sig_tb <= "1001"; -- Multiplication
+        wait for DELAY;
+
+        -- Multiplication with both negative numbers (-3 * -2 = 6)
+        in1_tb <= std_logic_vector(to_signed(-3, 16));
+        in2_tb <= std_logic_vector(to_signed(-2, 16));
+        sig_tb <= "1001"; -- Multiplication
+        wait for DELAY;
+
+        -- Multiplication with zero (0 * 5 = 0)
+        in1_tb <= std_logic_vector(to_signed(0, 16));
+        in2_tb <= std_logic_vector(to_signed(5, 16));
+        sig_tb <= "1001"; -- Multiplication
+        wait for DELAY;
+
+        -- Multiplication + overflow (200 * 600 = 120000, overflow)
+        in1_tb <= std_logic_vector(to_signed(200, 16));
+        in2_tb <= std_logic_vector(to_signed(600, 16));
+        sig_tb <= "1001"; -- Multiplication
+        wait for DELAY;
+
+        -- Multiplication + overflow (-32768 * 2, overflow)
+        in1_tb <= std_logic_vector(to_signed(-32768, 16));
+        in2_tb <= std_logic_vector(to_signed(2, 16));
+        sig_tb <= "1001"; -- Multiplication
         wait for DELAY;
         
         wait;
