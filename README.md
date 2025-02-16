@@ -101,7 +101,7 @@ This script automates the process of compiling and simulating the ALU project, a
 
 ## Author
 
-This project was developed for educational purposes for Embedded Systems exam, by Andrea Grassi.
+This project was developed by Andrea Grassi, for educational purposes for Embedded Systems exam.
 
 ## License
 
